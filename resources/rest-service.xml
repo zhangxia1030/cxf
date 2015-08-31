@@ -1,0 +1,25 @@
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxrs="http://cxf.apache.org/jaxrs" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:security="http://www.springframework.org/schema/security" xsi:schemaLocation=" http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop  http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/security  http://www.springframework.org/schema/security/spring-security.xsd http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
+    
+    <import resource="classpath:META-INF/cxf/cxf.xml"/>
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+
+    <bean id="testServiceInterceptor" class="demo.interceptor.TestInterceptor" />
+
+    <bean id="service" class="demo.restful.server.RoomService" />
+
+    <jaxrs:server id="testServiceContainer" address="/rest">
+        <jaxrs:serviceBeans>
+            <ref bean="service" />
+        </jaxrs:serviceBeans>
+        <jaxrs:inInterceptors>
+            <ref bean="testServiceInterceptor" />
+        </jaxrs:inInterceptors>
+        <jaxrs:extensionMappings>
+            <entry key="json" value="application/json" />
+            <entry key="xml" value="application/xml" />
+        </jaxrs:extensionMappings>
+        <jaxrs:languageMappings>
+            <entry key="cn" value="cn-ZH"/>
+        </jaxrs:languageMappings>
+    </jaxrs:server>
+</beans>
