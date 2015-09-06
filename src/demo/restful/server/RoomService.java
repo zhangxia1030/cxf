@@ -46,7 +46,7 @@ public class RoomService {
     @GET  
     @Path("/room")  
     @Produces(MediaType.APPLICATION_XML)  
-    public List<Room> getAllRoom()  
+    public List<Room> getAllRoom()
     {  
         System.out.println("get all room");  
         Room r1 = new Room();
@@ -63,6 +63,7 @@ public class RoomService {
         list.add(r1);
         list.add(r2);
         list.add(r3);
+        
         return list;  
     }  
       
